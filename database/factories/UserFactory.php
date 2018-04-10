@@ -1,7 +1,8 @@
 <?php
 
 use Faker\Generator as Faker;
-
+use App\User;
+use App\Profile;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -12,14 +13,46 @@ use Faker\Generator as Faker;
 | model instances for testing / seeding your application's database.
 |
 */
-
-$factory->define(App\User::class, function (Faker $faker) {
-    static $password;
-
+$factory->define(User::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'nickname' => $faker->userName,
         'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'remember_token' => str_random(10),
+        'verified' => $verificado = $faker->randomElement([User::USUARIO_VERIFICADO, User::USUARIO_NO_VERIFICADO]),
+        'verification_token' => $verificado == User::USUARIO_VERIFICADO ? null : User::generarVerificationToken(),
+        'admin' => $faker->randomElement([User::USUARIO_ADMINISTRADOR, User::USUARIO_REGULAR]),
+        'register_date' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'last_connection' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'last_ip' => $faker->ipv4,
+        'balance' => $faker->randomNumber($nbDigits = NULL, $strict = false),
+    ];
+});
+
+$factory->define(Profile::class, function (Faker $faker) {
+    return [
+        'name' => $faker->firstName,
+        'lastname' => $faker->lastname,
+        'birthdate' => $faker->date($format = 'Y-m-d', $max = 'now'), 
+        'gender' => $faker->randomElement(['Mujer', 'Hombre', 'Transexual']),
+        'country' => $faker->country,
+        'state' => $faker->state,
+        'city' => $faker->city,
+        'phone' => $faker->e164PhoneNumber,
+        'user_id' => $faker->unique()->numberBetween(1, App\User::count()),
+    ];
+});
+
+$factory->define(Profile::class, function (Faker $faker) {
+    return [
+        'name' => $faker->firstName,
+        'lastname' => $faker->lastname,
+        'birthdate' => $faker->date($format = 'Y-m-d', $max = 'now'), 
+        'gender' => $faker->randomElement(['Mujer', 'Hombre', 'Transexual']),
+        'country' => $faker->country,
+        'state' => $faker->state,
+        'city' => $faker->city,
+        'phone' => $faker->e164PhoneNumber,
+        'user_id' => $faker->unique()->numberBetween(1, App\User::count()),
     ];
 });
