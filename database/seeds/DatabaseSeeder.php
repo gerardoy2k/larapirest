@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0'); /*Inactivamos el chequeo de claves foranes en la BD*/
+        //DB::statement('SET FOREIGN_KEY_CHECKS = 0'); /*Inactivamos el chequeo de claves foranes en la BD*/
         User::truncate();
         Profile::truncate();
         Role::truncate();
