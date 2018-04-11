@@ -5,6 +5,7 @@ use App\User;
 use App\Profile;
 use App\Role;
 use App\Category;
+use App\Modelo;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,13 +23,14 @@ class DatabaseSeeder extends Seeder
         Category::truncate();
      	DB::table('role_user')->truncate();
 
-     	$cantidadUsuarios = 200;
+        $cantidadUsuarios = 200;
+        $cantidadModelos = 50; 
      	$cantidadPerfil = 200;
 
         //   Agregamos los roles fijos 
-        Role::create(array('name' => 'admin'));
-        Role::create(array('name' => 'evaluador'));
-        Role::create(array('name' => 'consultor'));
+        Role::create(array('name' => 'cliente'));
+        Role::create(array('name' => 'modelo'));
+        Role::create(array('name' => 'administrator'));
         
         factory(User::class, $cantidadUsuarios)->create()->each(
             function($user){
@@ -42,7 +44,7 @@ class DatabaseSeeder extends Seeder
         Category::create(array('name' => 'Mujeres'));
         Category::create(array('name' => 'Hombres'));
         Category::create(array('name' => 'Trans'));
-        
+        factory(Modelo::class, $cantidadModelos)->create();
 
         // $this->call(UsersTableSeeder::class);
     }

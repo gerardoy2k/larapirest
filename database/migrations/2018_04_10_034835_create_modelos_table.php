@@ -14,6 +14,7 @@ class CreateModelosTable extends Migration
     public function up()
     {
         Schema::create('modelos', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('age')->unsigned();
             $table->string('body_type');
@@ -22,7 +23,10 @@ class CreateModelosTable extends Migration
             $table->string('color_eye');
             $table->string('about_me');
             $table->string('about_show');
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');            
         });
     }
 

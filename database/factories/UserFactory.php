@@ -3,6 +3,7 @@
 use Faker\Generator as Faker;
 use App\User;
 use App\Profile;
+use App\Modelo;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -43,16 +44,15 @@ $factory->define(Profile::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(Profile::class, function (Faker $faker) {
+$factory->define(Modelo::class, function (Faker $faker) {
     return [
-        'name' => $faker->firstName,
-        'lastname' => $faker->lastname,
-        'birthdate' => $faker->date($format = 'Y-m-d', $max = 'now'), 
-        'gender' => $faker->randomElement(['Mujer', 'Hombre', 'Transexual']),
-        'country' => $faker->country,
-        'state' => $faker->state,
-        'city' => $faker->city,
-        'phone' => $faker->e164PhoneNumber,
-        'user_id' => $faker->unique()->numberBetween(1, App\User::count()),
+        'age' => $faker->numberBetween($min = 18, $max = 70),
+        'body_type' => $faker->randomElement(['Gordita', 'Flaquita', 'Atletica']),
+        'weight' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 200), 
+        'height' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 3), 
+        'color_eye' => $faker->safeColorName,
+        'about_me' => $faker->text($maxNbChars = 191),
+        'about_show' => $faker->text($maxNbChars = 191),
+        'user_id' => $faker->numberBetween(1, App\User::count()),
     ];
 });

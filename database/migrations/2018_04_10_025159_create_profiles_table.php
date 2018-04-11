@@ -14,6 +14,7 @@ class CreateProfilesTable extends Migration
     public function up()
     {
         Schema::create('profiles', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
             $table->string('lastname');
@@ -23,7 +24,7 @@ class CreateProfilesTable extends Migration
             $table->string('state')->nullable();
             $table->string('city')->nullable();
             $table->string('phone')->nullable();
-            $table->integer('user_id')->unsigned();
+            $table->unsignedInteger('user_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
