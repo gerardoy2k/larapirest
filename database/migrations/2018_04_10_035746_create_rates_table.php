@@ -14,7 +14,7 @@ class CreateRatesTable extends Migration
     public function up()
     {
         Schema::create('rates', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+            //$table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('modelo_id')->unsigned();
             $table->integer('service_id')->unsigned();
