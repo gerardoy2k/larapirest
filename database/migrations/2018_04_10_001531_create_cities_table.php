@@ -18,7 +18,7 @@ class CreateCitiesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('iatacode');
-            $table->string('country_id');
+            $table->unsignedInteger('country_id');
             $table->timestamps();
 
             $table->foreign('country_id')->references('id')->on('countries');
