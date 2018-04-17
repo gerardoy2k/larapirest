@@ -24,7 +24,7 @@ Route::post('login', 'User\UserController@login');
 Route::post('register', 'User\UserController@register');
 Route::get('register/verify/{confirmationCode}', [
     'as' => 'confirmation_path',
-    'uses' => 'UserController@confirm'
+    'uses' => 'User\UserController@confirm'
 ]);
 
 Route::resource('users','User\UserController',['except' => ['create','edit']]);
