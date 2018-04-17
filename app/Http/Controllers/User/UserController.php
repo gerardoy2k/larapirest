@@ -16,7 +16,7 @@ class UserController extends ApiController
         // Solo chequea cliente-id, no tiene que loguearse en el sistema
         //$this->middleware('client.credentials')->only(['store']); // permite crear usuario sin login
         // chequea usuarios autenticados
-        $this->middleware('auth:api')->except(['login','register','update']);
+        //$this->middleware('auth:api')->except(['login','register','update']);
     }
 
     /** 
