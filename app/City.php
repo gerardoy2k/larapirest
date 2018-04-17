@@ -20,7 +20,7 @@ class City extends Model
 
     public function country()
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(Country::class);
     }
 
     public function profiles()

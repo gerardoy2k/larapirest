@@ -5,6 +5,7 @@ use App\User;
 use App\Profile;
 use App\Role;
 use App\Category;
+use App\Subcategory;
 use App\Modelo;
 use App\Country;
 use App\City;
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
         Profile::truncate();
         User::truncate();
         Role::truncate();
+        Subcategory::truncate();
         Category::truncate();
         Country::truncate();
         City::truncate();*/
@@ -59,6 +61,13 @@ class DatabaseSeeder extends Seeder
         Category::create(array('name' => 'Mujeres'));
         Category::create(array('name' => 'Hombres'));
         Category::create(array('name' => 'Trans'));
+
+        Subcategory::create(array('name' => 'Asian', 'category_id' => '1'));
+        Subcategory::create(array('name' => 'Big Tits', 'category_id' => '1'));
+        Subcategory::create(array('name' => 'American', 'category_id' => '2'));
+        Subcategory::create(array('name' => 'Big Tits', 'category_id' => '2'));
+        Subcategory::create(array('name' => 'Asian', 'category_id' => '3'));
+        
         factory(Modelo::class, $cantidadModelos)->create();
 
         // $this->call(UsersTableSeeder::class);
