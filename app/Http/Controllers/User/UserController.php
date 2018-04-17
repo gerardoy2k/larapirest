@@ -65,6 +65,7 @@ class UserController extends ApiController
         $input['balance'] = 0;
         $input['verification_token'] = User::generarVerificationToken();
         $input['verified'] = 0;
+        $userResponse = null;
         try{
             $user = User::create($input); 
             $userResponse['nickname'] = $user->nickname; 
