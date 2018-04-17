@@ -67,6 +67,9 @@ class UserController extends ApiController
         $input['verified'] = 0;
         try{
             $user = User::create($input); 
+            $userResponse['nickname'] = $user->nickname; 
+            $userResponse['email'] = $user->email;
+            $userResponse['register_date'] = $user->register_date;
         } catch (\Illuminate\Database\QueryException $e){
             $errorCode = $e->errorInfo[1];
             if($errorCode == 1062){
@@ -78,9 +81,6 @@ class UserController extends ApiController
             $message->to(Input::get('email'), Input::get('username'))
                 ->subject('Verify your email address');
         });*/
-        $userResponse['nickname'] = $user->nickname; 
-        $userResponse['email'] = $user->email;
-        $userResponse['register_date'] = $user->register_date;
         $success['status'] = true;
         $success['message'] = 'user created successfully';
         $success['user'] = $userResponse;
