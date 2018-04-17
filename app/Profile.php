@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Profile extends Model
 {
@@ -16,15 +17,24 @@ class Profile extends Model
         'name', 
         'lastname',
         'birthdate',
-        'genero',
-        'country',
+        'gender',
+        'country_id',
         'state',
-        'city',
+        'city_id',
         'phone',
+        'user_id'
     ];
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
+    }
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 }

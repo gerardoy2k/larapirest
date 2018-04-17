@@ -36,9 +36,9 @@ $factory->define(Profile::class, function (Faker $faker) {
         'lastname' => $faker->lastname,
         'birthdate' => $faker->date($format = 'Y-m-d', $max = 'now'), 
         'gender' => $faker->randomElement(['Mujer', 'Hombre', 'Transexual']),
-        'country' => $faker->country,
+        'country_id' => $faker->numberBetween(1, App\Country::count()),
         'state' => $faker->state,
-        'city' => $faker->city,
+        'city_id' => $faker->numberBetween(1, App\City::count()),
         'phone' => $faker->e164PhoneNumber,
         'user_id' => $faker->unique()->numberBetween(1, App\User::count()),
     ];

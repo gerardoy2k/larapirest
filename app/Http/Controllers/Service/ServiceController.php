@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Service;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
+use App\Service;
 
-class ServiceController extends Controller
+class ServiceController extends ApiController
 {
+    public function __construct(){
+        parent::__construct();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $services = Service::all();
+        return $this->showAll($services);
     }
 
     /**

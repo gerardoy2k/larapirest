@@ -14,7 +14,7 @@ class CategoryModeloTable extends Migration
     public function up()
     {
         Schema::create('category_model', function (Blueprint $table) {
-            //$table->engine = 'InnoDB';
+            $table->engine = 'InnoDB';
             $table->integer('category_id')->unsigned();
             $table->integer('modelo_id')->unsigned();
 

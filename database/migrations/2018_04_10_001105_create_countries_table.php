@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRatesTable extends Migration
+class CreateCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,12 @@ class CreateRatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('rates', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('modelo_id')->unsigned();
-            $table->integer('service_id')->unsigned();
-            $table->integer('tokens_count')->unsigned();
+            $table->string('name');
+            $table->string('iatacode');
             $table->timestamps();
-
-            $table->foreign('modelo_id')->references('id')->on('modelos');
-            $table->foreign('service_id')->references('id')->on('services');
         });
     }
 
@@ -33,6 +29,6 @@ class CreateRatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rates');
+        Schema::dropIfExists('countries');
     }
 }

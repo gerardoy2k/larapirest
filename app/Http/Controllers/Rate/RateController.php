@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Rate;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
+use App\Rate;
 
-class RateController extends Controller
+class RateController extends ApiController
 {
+    public function __construct(){
+        parent::__construct();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,8 @@ class RateController extends Controller
      */
     public function index()
     {
-        //
+        $rates = Rate::all();
+        return $this->showAll($rates);
     }
 
     /**

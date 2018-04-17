@@ -4,9 +4,18 @@ namespace App\Http\Controllers\Category;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Category;
+use App\Http\Controllers\ApiController;
 
-class CategoryController extends Controller
+class CategoryController extends ApiController
 {
+    public function __construct()
+    {
+        // Solo chequea cliente-id, no tiene que loguearse en el sistema
+        $this->middleware('client.credentials')->only(['index']);
+        // chequea usuarios autenticados
+        $this->middleware('auth:api')->except(['index']);
+    }   
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +23,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $categorias = Category::all();
+        return $this->showAll($categorias);
     }
 
     /**
@@ -35,7 +35,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reglas = [
+            'name' => 'required', // Requerido
+        ];
+        $this->validate($request, $reglas);  // validamos con las reglas. si no valida arrojamos excepcion
+        $campos = $request->all(); // extraemos todos los valores del request
+        $category = Category::create($campos);
+        return $this->showOne($category, 201);
     }
 
     /**
@@ -44,20 +50,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        //$category = Category::findOrFail($id);
+        return $this->showOne($category);
     }
 
     /**
@@ -69,7 +65,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        if ($request->has('name')){
+            $category->name = $request->name;
+        }
+        if (!$category->isDirty())  // Si el objeto no ha sido modificado en alguno de sus valores  // 422 Malformed Request
+            return $this->errorResponse('Se debe especificar al menos un valor diferente para modificar ', 422);  
+        $category->save();
+        return $this->showOne($category);
     }
 
     /**
@@ -78,8 +81,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        //$category = Category::findOrFail($id);
+        $category->delete();
+        return $this->showOne($category);
     }
 }

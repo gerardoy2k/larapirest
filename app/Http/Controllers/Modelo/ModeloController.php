@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Role;
+namespace App\Http\Controllers\Modelo;
 
+use App\Modelo;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\ApiController;
-use App\Role;
 
-class RoleController extends ApiController
+class ModeloController extends ApiController
 {
     public function __construct(){
         parent::__construct();
@@ -19,18 +18,8 @@ class RoleController extends ApiController
      */
     public function index()
     {
-        $roles = Role::all();
-        return $this->showAll($roles);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $modelos = Modelo::with('user.profile')->get();
+        return $this->showAll($modelos);
     }
 
     /**
@@ -47,33 +36,23 @@ class RoleController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Modelo  $modelo
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $modelo = Modelo::with('user.profile')->findOrFail($id);
+        return $this->showOne($modelo);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Modelo  $modelo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Modelo $modelo)
     {
         //
     }
@@ -81,10 +60,10 @@ class RoleController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Modelo  $modelo
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Modelo $modelo)
     {
         //
     }
