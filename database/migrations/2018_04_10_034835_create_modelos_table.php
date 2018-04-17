@@ -14,7 +14,7 @@ class CreateModelosTable extends Migration
     public function up()
     {
         Schema::create('modelos', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+            //$table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('age')->unsigned();
             $table->string('body_type');

@@ -14,7 +14,7 @@ class CreateCitiesTable extends Migration
     public function up()
     {
         Schema::create('cities', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+            //$table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
             $table->string('iatacode');
