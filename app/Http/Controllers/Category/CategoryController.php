@@ -12,9 +12,9 @@ class CategoryController extends ApiController
     public function __construct()
     {
         // Solo chequea cliente-id, no tiene que loguearse en el sistema
-        $this->middleware('client.credentials')->only(['index']);
+        //$this->middleware('client.credentials')->only(['index']);
         // chequea usuarios autenticados
-        $this->middleware('auth:api')->except(['index']);
+        //$this->middleware('auth:api')->except(['index']);
     }   
     /**
      * Display a listing of the resource.
