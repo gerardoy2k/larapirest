@@ -66,17 +66,14 @@ class UserController extends ApiController
         $input['verification_token'] = User::generarVerificationToken();
         $input['verified'] = 0;
         $userResponse = null;
-        try{
-            $user = User::create($input); 
-            $userResponse['nickname'] = $user->nickname; 
-            $userResponse['email'] = $user->email;
-            $userResponse['register_date'] = $user->register_date;
-        } catch (\Illuminate\Database\QueryException $e){
-            $errorCode = $e->errorInfo[1];
-            if($errorCode == 1062){
-                return $this->errorResponse('email already exists', 422); 
-            }
-        }
+        $userResponse = User::where('email','=',$input['email'])->first();
+        if (!is_null($userResponse))
+            return $this->errorResponse('email already exists', 422); 
+
+        $user = User::create($input); 
+        $userResponse['nickname'] = $user->nickname; 
+        $userResponse['email'] = $user->email;
+        $userResponse['register_date'] = $user->register_date;
         // enviamos correo de confirmacion de email
 /*        Mail::send('email.verify', $input['verification_token'], function($message) {
             $message->to(Input::get('email'), Input::get('username'))
