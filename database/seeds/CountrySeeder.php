@@ -12,10 +12,10 @@ class CountrySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('countries')->delete();
+        DB::table('countries')->truncate();
 
         $filename = dirname(__FILE__) . '/data/countries.csv';
-        foreach(file($filename) as $line) {
+        foreach(file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
             
             $infoPais = explode(",", $line);
             $country = ['iatacode' => $infoPais[0],

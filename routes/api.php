@@ -40,6 +40,6 @@ Route::resource('services','Service\ServiceController',['except' => ['create','e
 Route::resource('videos','Video\VideoController',['except' => ['create','edit']]);
 Route::resource('countries','Country\CountryController',['except' => ['create','edit']]);
 Route::resource('cities','City\CityController',['except' => ['create','edit']]);
-
+Route::get('countries/{country_id}/cities', 'City\CityController@citiesByCountryId');
 
 Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');

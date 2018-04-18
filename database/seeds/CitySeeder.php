@@ -13,10 +13,10 @@ class CitySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('cities')->delete();
+        DB::table('cities')->truncate();
 
         $filename = dirname(__FILE__) . '/data/cities.csv';
-        foreach(file($filename) as $line) {
+        foreach(file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
             
             $infoCity = explode(",", $line);
             $country = Country::where("iatacode","=",$infoCity[0])->first();
