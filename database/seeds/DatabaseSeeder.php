@@ -34,6 +34,8 @@ class DatabaseSeeder extends Seeder
         $cantidadModelos = 50; 
      	$cantidadPerfil = 200;
 
+        $this->call(CountrySeeder::class);
+        $this->call(CitySeeder::class);
         //   Agregamos algunos paises fijos 
         Country::create(array('name' => 'Colombia','iatacode' => 'COL'));
         Country::create(array('name' => 'Perú','iatacode' => 'PER'));
