@@ -12,7 +12,7 @@ class CountrySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('countries')->truncate();
+        DB::table('countries')->delete();
 
         $filename = dirname(__FILE__) . '/data/countries.csv';
         foreach(file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {

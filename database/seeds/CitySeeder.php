@@ -13,7 +13,7 @@ class CitySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('cities')->truncate();
+        DB::table('cities')->delete();
 
         $filename = dirname(__FILE__) . '/data/cities.csv';
         foreach(file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {

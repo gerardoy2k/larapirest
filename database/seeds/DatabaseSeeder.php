@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CountrySeeder::class);
         $this->call(CitySeeder::class);
-        //   Agregamos algunos paises fijos 
+/*        //   Agregamos algunos paises fijos 
         Country::create(array('name' => 'Colombia','iatacode' => 'COL'));
         Country::create(array('name' => 'Perú','iatacode' => 'PER'));
         Country::create(array('name' => 'Venezuela','iatacode' => 'VEN'));
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
         City::create(array('name' => 'Bogotá','iatacode' => 'BOG','country_id' => '1'));
         City::create(array('name' => 'Medellin','iatacode' => 'MED','country_id' => '1'));
         City::create(array('name' => 'Cali','iatacode' => 'CAL','country_id' => '1'));
-
+*/
         //   Agregamos los roles fijos 
         Role::create(array('name' => 'cliente'));
         Role::create(array('name' => 'modelo'));
