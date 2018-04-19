@@ -23,8 +23,8 @@ class CategoryController extends ApiController
      */
     public function index()
     {
-        $categorias = Category::all();
-        return $this->showAll($categorias);
+        $categories = Category::with('subcategories')->get();
+        return $this->showAll($categories);
     }
 
     /**

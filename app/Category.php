@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Subcategory;
 
 class Category extends Model
 {
@@ -19,5 +20,10 @@ class Category extends Model
     public function modelos()
     {
     	return $this->belongsToMany(Modelo::class);
+    }
+
+    public function subcategories()
+    {
+        return $this->hasMany(Subcategory::class);
     }
 }
