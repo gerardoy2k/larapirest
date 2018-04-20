@@ -1,0 +1,36 @@
+image: php:7-fpm
+pipelines:
+  default:
+    - step:
+        script:
+          - apt-get update && apt-get install -qy git curl libmcrypt-dev mysql-client
+          - yes | pecl install mcrypt-1.0.1
+          - docker-php-ext-install pdo_mysql
+          - chmod +x ./install-composer.sh
+          - ./install-composer.sh
+          - composer install
+          - export CACHE_DRIVER=redis
+          - export SESSION_DRIVER=redis
+          - export DB_CONNECTION=mysql
+          - php artisan migrate:fresh
+          - php artisan db:seed
+          - php artisan serve &
+          - sleep 5
+          - curl -vk http://localhost:8000
+        services:
+          - mysql
+    - step:
+        name: Deploy to test
+        deployment: test
+        script: 
+          - echo "Deploy"
+
+definitions:
+  services:
+    mysql:
+      image: mysql
+      environment:
+        MYSQL_DATABASE: 'chatsex'
+        MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+        MYSQL_USER: 'chatsex_root'
+        MYSQL_PASSWORD: 'sa'

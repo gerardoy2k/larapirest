@@ -113,7 +113,7 @@ class UserController extends ApiController
      */
     public function index()
     {
-        $usuarios = User::all();
+        $usuarios = User::with('profile')->get();
         return $this->showAll($usuarios);
     }
 
