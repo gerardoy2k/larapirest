@@ -16,7 +16,7 @@ class UserController extends ApiController
         // Solo chequea cliente-id, no tiene que loguearse en el sistema
         //$this->middleware('client.credentials')->only(['store']); // permite crear usuario sin login
         // chequea usuarios autenticados
-        //$this->middleware('auth:api')->except(['login','register','update']);
+        //$this->middleware('auth:api')->except(['login','register','update','confirm']);
     }
 
     /** 
@@ -25,7 +25,6 @@ class UserController extends ApiController
      * @return \Illuminate\Http\Response 
      */ 
     public function login(Request $request){ 
-
         $this->validate($request, [
             'email' => 'required|
                         string|
@@ -35,12 +34,12 @@ class UserController extends ApiController
                            min:6',
         ]);
         if(Auth::attempt(['email' => request('email'), 
-                          'password' => request('password'), 
-                          'verified' => 1])){ 
+                          'password' => request('password')/*, 
+                          'verified' => 1*/])){ 
             $user = Auth::user(); 
             $success['status'] = true;
             $success['message'] = 'Login successfully';
-            $success['token'] =  $user->createToken('Chatsex')->accessToken; 
+            $success['token'] =  "kjhgdjhfkgkiy987687/)(i9pohiugoygyug88898hiuh76786r6;;l;l'plpl'pp]]=l]ll=l]=l=l0l-0-l]]o;0o0o-0[ii;-0i-0i98y75r8j8u5r6f76f876tj876t876t876h7687juihij987987t76r856t8768768678769809jijliuhkyf56u58g76gi7y9";//$user->createToken('Chatsex')->accessToken; 
             return $this->showResponse($success,200);
         } 
         else{ 

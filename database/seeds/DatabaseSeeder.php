@@ -63,12 +63,16 @@ class DatabaseSeeder extends Seeder
         Category::create(array('name' => 'Mujeres'));
         Category::create(array('name' => 'Hombres'));
         Category::create(array('name' => 'Trans'));
+        Category::create(array('name' => 'Parejas'));
 
-        Subcategory::create(array('name' => 'Asian', 'category_id' => '1'));
-        Subcategory::create(array('name' => 'Big Tits', 'category_id' => '1'));
-        Subcategory::create(array('name' => 'American', 'category_id' => '2'));
-        Subcategory::create(array('name' => 'Big Tits', 'category_id' => '2'));
-        Subcategory::create(array('name' => 'Asian', 'category_id' => '3'));
+        Subcategory::create(array('name' => 'Asiaticas', 'category_id' => '1'));
+        Subcategory::create(array('name' => 'Tetas Grandes', 'category_id' => '1'));
+        Subcategory::create(array('name' => 'Pene Grande', 'category_id' => '2'));
+        Subcategory::create(array('name' => 'BBC', 'category_id' => '2'));
+        Subcategory::create(array('name' => 'Asiaticas', 'category_id' => '3'));
+        Subcategory::create(array('name' => 'Baby sitters', 'category_id' => '3'));
+        Subcategory::create(array('name' => 'Latinos', 'category_id' => '4'));
+        Subcategory::create(array('name' => 'Anal', 'category_id' => '4'));
         
         factory(Modelo::class, $cantidadModelos)->create();
 
