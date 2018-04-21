@@ -39,7 +39,9 @@ class UserController extends ApiController
             $user = Auth::user(); 
             $success['status'] = true;
             $success['message'] = 'Login successfully';
-            $success['token'] =  "kjhgdjhfkgkiy987687/)(i9pohiugoygyug88898hiuh76786r6;;l;l'plpl'pp]]=l]ll=l]=l=l0l-0-l]]o;0o0o-0[ii;-0i-0i98y75r8j8u5r6f76f876tj876t876t876h7687juihij987987t76r856t8768768678769809jijliuhkyf56u58g76gi7y9";//$user->createToken('Chatsex')->accessToken; 
+            $success['token'] =  "kjhgdjhfkgkiy987687/)(i9pohiugoygyug88898hiuh76786r6;;l;l'plpl'pp]]=l]ll=l]=l=l0l-0-l]]o;0o0o-0[ii;-0i-0i98y75r8j8u5r6f76f876tj876t876t876h7687juihij987987t76r856t8768768678769809jijliuhkyf56u58g76gi7y9";
+            //$user->createToken('Chatsex')->accessToken; 
+            $success['user_id'] = $user->id; 
             return $this->showResponse($success,200);
         } 
         else{ 
@@ -74,10 +76,13 @@ class UserController extends ApiController
         $userResponse['email'] = $user->email;
         $userResponse['register_date'] = $user->register_date;
         // enviamos correo de confirmacion de email
-/*        Mail::send('email.verify', $input['verification_token'], function($message) {
-            $message->to(Input::get('email'), Input::get('username'))
+        Mail::send('email', [], function($message) {
+            $message
+                ->from('noreply@chat.com','administrador')
+                /*->to(Input::get('email'), Input::get('username'))*/
+                ->to('gerardoy2k@gmail.com', 'username')
                 ->subject('Verify your email address');
-        });*/
+        });
         $success['status'] = true;
         $success['message'] = 'user created successfully';
         $success['user'] = $userResponse;
