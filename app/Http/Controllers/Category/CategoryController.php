@@ -69,7 +69,14 @@ class CategoryController extends ApiController
         if ($request->has('name')){
             $category->name = $request->name;
         }
-        if (!$category->isDirty())  // Si el objeto no ha sido modificado en alguno de sus valores  // 422 Malformed Request
+        // Si viene el campo subcategories entonces es que se hizo alguna modificacion de las subcategorias, sino se deja igual 
+        if ($request->has('subcategories')){
+            // borrar las subcategorias asociadas a la categoria
+            $category->subcategories()->delete();
+            // crear las nuevas categorias
+            $category->subcategories()->createMany($request->subcategories);
+        }
+        if (!$category->isDirty() && !$request->has('subcategories'))  // Si el objeto no ha sido modificado en alguno de sus valores  // 422 Malformed Request
             return $this->errorResponse('Se debe especificar al menos un valor diferente para modificar ', 422);  
         $category->save();
         return $this->showOne($category);
