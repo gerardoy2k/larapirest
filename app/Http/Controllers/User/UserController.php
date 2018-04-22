@@ -74,7 +74,7 @@ class UserController extends ApiController
         $user = User::create($input); 
         $userResponse['nickname'] = $user->nickname; 
         $userResponse['email'] = $user->email;
-        $userResponse['register_date'] = $user->register_date;*/
+        $userResponse['register_date'] = $user->register_date;
         // enviamos correo de confirmacion de email
 /*        Mail::send('email', [], function($message) {
             $message
